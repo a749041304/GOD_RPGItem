@@ -118,17 +118,14 @@ public class Main extends JavaPlugin implements Listener{
 								Matcher matcher = pattren.matcher(s);
 								if (matcher.find()) {
 									armor += getValue(matcher.group(1));
-									System.out.println("armor" + armor);
 								}
 							}
 						}
 					}
 				}
 			}
-			System.out.println("damage" + e.getDamage());
 			double damage = e.getDamage() - armor;
 			if (damage < 0) damage = 2;
-			System.out.println(damage);
 			e.setDamage(damage);
 		}
 	}
