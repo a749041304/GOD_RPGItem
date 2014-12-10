@@ -1,0 +1,6 @@
+name: RPGItem
+main: org.jason.rpgitem.Main
+version: 1.0
+
+commands:
+  item:
