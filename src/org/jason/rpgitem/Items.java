@@ -9,6 +9,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import com.comphenix.protocol.utility.StreamSerializer;
+
 public class Items {
 	
 	private static File f;
@@ -24,12 +26,21 @@ public class Items {
 	}
 	
 	public static void add (String flag, ItemStack item) {
-		data.set(flag, item);
-		save ();
+		try {
+			data.set(flag, StreamSerializer.getDefault().serializeItemStack(item));
+			save ();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static ItemStack get (String flag) {
-		return data.getItemStack(flag);
+		try {
+			return StreamSerializer.getDefault().deserializeItemStack(data.getString(flag));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static List <ItemStack> getAll () {
